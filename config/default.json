@@ -1,0 +1,6 @@
+{
+    "jwtPrivateKey":"Charan_Singh",
+    "db":"mongodb+srv://root:root@cluster0.yb1m5.mongodb.net/Charan?retryWrites=true&w=majority",
+    "PORT":3900,
+    "authRequired":true
+}
