@@ -26,7 +26,7 @@ router.post('/',async (req,res)=>{
     if(!user)return res.status(404).send('Error occured.');
     const token=user.generateAuthToken();
     return res.header('x-auth-token',token)
-    .header('cross-control-access-token','x-auth-token')
+    .header('access-control-expose-headers','x-auth-token')
     .send(_.pick(user,['_id','name','isAdmin']));
 });
 module.exports=router;
