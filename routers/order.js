@@ -13,11 +13,13 @@ router.post('/',async(req,res)=>{
     const item=await Item.findById(req.body.itemId);
     if(!item)return res.status(400).send('Invalid itemId.');
     if(item.count==0)return res.send(400).send('No Item in the stock.');
+    if(customer.balance<item.price)return res.status(400).send('Insufficient Balance.')
     let order=new Order({
         customer:{
             _id:customer._id,
             name:customer.name,
-            phone:customer.phone
+            phone:customer.phone,
+            balance:customer.balance
         },
         item:{
             _id:item._id,
@@ -29,7 +31,8 @@ router.post('/',async(req,res)=>{
     try{
         new Fawn.Task()
         .save('orders',order)
-        .update('items',{_id:item._id},{$inc:{count:-1}}).run();
+        .update('items',{_id:item._id},{$inc:{count:-1}})
+        .update('customers',{_id:customer._id},{$inc:{balance:-item.price}}).run();
         return res.send(order);
     }
     catch(ex){
