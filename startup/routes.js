@@ -5,6 +5,7 @@ const user=require('../routers/user');
 const auth=require('../routers/auth');
 const image=require('../routers/image');
 const product=require('../routers/product');
+const item=require('../routers/item');
 
 module.exports=function(app){
     app.use(cors());
@@ -13,6 +14,7 @@ module.exports=function(app){
     app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
     app.use('/public/uploads',express.static('public/uploads'));
     app.use('/product',product);
+    app.use('/item',item);
     app.use('/user',user);
     app.use('/auth',auth);
     app.use('/image',image);

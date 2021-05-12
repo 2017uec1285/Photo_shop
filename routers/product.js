@@ -13,41 +13,41 @@ const upload=multer({storage:storage}).single('file');
 
 router.get('/:id',async(req,res)=>{
     const product=await Product.findById(req.params.id);
-    return res.send(product);
+    return res.send({
+        name:product.name,
+        productImage:'http://localhost:3900/'+product.productImage,
+        _id:product._id,
+        request:{
+            type:"GET",
+            url:'http://localhost:3900/product/'+product._id
+        }
+    });
 });
 
 router.get('/',async(req,res)=>{
-    let product=await Product.find();
-    product=product.map(item=>(
-        // 
+    let products=await Product.find();
+    products=products.map(p=>(
         {
-            name:item.name,
-            price:item.price,
-            productImage:'http://localhost:3900/'+item.productImage,
-            _id:item._id,
+            name:p.name,
+            productImage:'http://localhost:3900/'+p.productImage,
+            _id:p._id,
             request:{
                 type:"GET",
-                url:'http://localhost:3900/product/'+item._id
+                url:'http://localhost:3900/product/'+p._id
             }
         }
     ));
-    return res.send(product);
+    return res.send(products);
 });
 
 router.post('/',upload,async (req,res)=>{
 
     const product=new Product({
         name:req.body.name,
-        price:req.body.price,
         productImage:req.file.path
     });
     await product.save();
     if(!product)return res.status(404).send('Error occured.');
     return res.send(product);
 });
-// router.get('/:id',async(req,res)=>{
-//     // console.log(req.param);
-//     const product=await Product.findById(`${req.params.id}`);
-//     return res.send(product);
-// });
 module.exports=router;
