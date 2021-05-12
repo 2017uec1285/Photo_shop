@@ -3,9 +3,11 @@ const cors=require('cors');
 const bodyParser=require('body-parser');
 const user=require('../routers/user');
 const auth=require('../routers/auth');
-const image=require('../routers/image');
+// const image=require('../routers/image');
 const product=require('../routers/product');
 const item=require('../routers/item');
+const customer=require('../routers/customer');
+
 
 module.exports=function(app){
     app.use(cors());
@@ -17,6 +19,7 @@ module.exports=function(app){
     app.use('/item',item);
     app.use('/user',user);
     app.use('/auth',auth);
-    app.use('/image',image);
+    app.use('/customer',customer);
+    // app.use('/image',image);
     
 };
