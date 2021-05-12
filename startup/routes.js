@@ -7,6 +7,7 @@ const auth=require('../routers/auth');
 const product=require('../routers/product');
 const item=require('../routers/item');
 const customer=require('../routers/customer');
+const order=require('../routers/order');
 
 
 module.exports=function(app){
@@ -19,6 +20,7 @@ module.exports=function(app){
     app.use('/item',item);
     app.use('/user',user);
     app.use('/auth',auth);
+    app.use('/order',order);
     app.use('/customer',customer);
     // app.use('/image',image);
     

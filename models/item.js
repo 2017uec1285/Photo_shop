@@ -15,6 +15,14 @@ const itemSchema=new mongoose.Schema({
         required:true,
         min:0
     },
+    count:{
+        type:Number,
+        required:true,
+        min:0
+    }
 });
 const Item=mongoose.model('items',itemSchema);
-module.exports.Item=Item;
+module.exports={
+    Item:Item,
+    itemSchema:itemSchema
+}

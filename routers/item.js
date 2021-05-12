@@ -9,6 +9,7 @@ router.get('/:id',async(req,res)=>{
     return res.send({
         _id:item._id,
         title:item.title,
+        count:item.count,
         product:{
             name:item.product.name,
             productImage:'http://localhost:3900/'+item.product.productImage,
@@ -25,6 +26,7 @@ router.get('/',async(req,res)=>{
         {
             _id:item._id,
             title:item.title,
+            count:item.count,
             product:{
                 name:item.product.name,
                 productImage:'http://localhost:3900/'+item.product.productImage,
@@ -42,6 +44,7 @@ router.post('/',async (req,res)=>{
     if(!product)return res.status(400).send('Invalid productId.');
     let item=new Item({
         title:req.body.title,
+        count:req.body.count,
         product:product,
         price:req.body.price,
 
