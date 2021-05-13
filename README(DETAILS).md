@@ -1,6 +1,7 @@
 # Photo_shop
 
 package used:
+
     1. bcrypt
     2. lodash
     3. jsonwebtoken
@@ -14,6 +15,7 @@ package used:
     11. mongoose
 
 models:
+
     1. Product
           I. name
           II. productImage
